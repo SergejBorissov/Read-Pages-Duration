@@ -16,6 +16,14 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 
+/**
+ * @author: Sergej Borissov
+ * @version: 1.0.0.0
+ * @idee: erfassung der Seiten und Menge an Büchern
+ *        pro metrischer Wiederholung einer Lesedauer
+ *
+ */
+
 public class BarChartExperiments extends Application {
 
 
@@ -23,11 +31,13 @@ public class BarChartExperiments extends Application {
 
 
     final int daysPerMonth = 30;
+    final int daysPerWeek = 7;
     final int minute = 60;
     final int daysPerYear = 365;
     final int pagePerHour = 20;
     final float averagePagesPerBook = 300f;
     final int monthsPerYear = 12;
+
 
 
     public static int calculateDurationYear(){
@@ -41,7 +51,6 @@ public class BarChartExperiments extends Application {
     public static float calculateBooksPerMonth(){
         return calculatePagePerMonth() / 300f;
     }
-
 
 
 
@@ -71,14 +80,17 @@ public class BarChartExperiments extends Application {
 
 
 
-        XYChart.Data MonthsData = new XYChart.Data("Lese-Zeit-Monatlich (h)", 0);
-        XYChart.Data YearData = new XYChart.Data("Lese-Zeit-Jahr (h)", 0);
-        XYChart.Data PageData = new XYChart.Data("Seiten pro Monat", 0);
-        XYChart.Data BookData = new XYChart.Data("(n)-Bücher in 10 Jahren", 0);
-        dataSeries1.getData().add(MonthsData);
-        dataSeries1.getData().add(YearData);
-        dataSeries1.getData().add(PageData);
-        dataSeries1.getData().add(BookData);
+
+        XYChart.Data pagesPerWeek = new XYChart.Data("Seiten pro Woche", 0);
+        XYChart.Data booksPerWeek = new XYChart.Data("Bücher pro Woche", 0);
+        XYChart.Data yearData = new XYChart.Data("Lese-Zeit-Jahr (h)", 0);
+
+        XYChart.Data booksMonth = new XYChart.Data("Bücher pro Monat", 0);
+
+        dataSeries1.getData().add(pagesPerWeek);
+        dataSeries1.getData().add(booksPerWeek);
+
+        dataSeries1.getData().add(booksMonth);
 
 
         // Monatsdata.YValueProperty().bind(daysOfMont.divide(minutesOfHour));
@@ -107,10 +119,10 @@ public class BarChartExperiments extends Application {
                 try {
 
 
-                    MonthsData.setYValue(Integer.parseInt(newValue) * minute / daysPerMonth);
-                    YearData.setYValue(Integer.parseInt(newValue) * calculateDurationYear());
-                    PageData.setYValue(Integer.parseInt(newValue) * calculatePagePerMonth());
-                    BookData.setYValue(Integer.parseInt(newValue) * calculateBooksPerMonth());
+                    pagesPerWeek.setYValue(Integer.parseInt(newValue) *  7 / 60);
+                    booksPerWeek.setYValue(Integer.parseInt(newValue) * 7 /60 * 20 / 300);
+                    yearData.setYValue(Integer.parseInt(newValue) * calculateDurationYear());
+                    booksMonth.setYValue(Integer.parseInt(newValue) * calculateBooksPerMonth());
 
 
                 } catch (NumberFormatException ex) {
@@ -160,8 +172,6 @@ public class BarChartExperiments extends Application {
 
 
 }
-
-
 
 --------------------
 
