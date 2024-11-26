@@ -1,0 +1,16 @@
+package de.borissov;
+
+import javafx.scene.control.TextField;
+
+public class TextFieldFactory {
+
+    public TextField buildTextField(){
+
+        TextField textField = new TextField();
+
+        return textField;
+
+    }
+}
+
+
