@@ -1,0 +1,30 @@
+package de.borissov;
+
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+
+public class LineChartFactory {
+
+    Zufallszahl zufallszahl = new Zufallszahl();
+
+    public LineChart buildLineChart(){
+
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+
+        LineChart<String, Number> lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+        XYChart.Series<String, Number> series1 = new XYChart.Series<String, Number>();
+        XYChart.Data<String, Number> laufzeit1 = new XYChart.Data<>("Laufzeit1: ", zufallszahl.numberPlay());
+        XYChart.Data<String, Number> laufzeit2 = new XYChart.Data<>("Laufzeit2: ", zufallszahl.numberPlay());
+        XYChart.Data<String, Number> laufzeit3 = new XYChart.Data<>("Laufzeit3: ", zufallszahl.numberPlay());
+        series1.getData().addAll(laufzeit1, laufzeit2, laufzeit3);
+
+        lineChart.getData().add(series1);
+
+        return lineChart;
+
+    }
+}
