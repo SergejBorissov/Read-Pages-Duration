@@ -1,0 +1,49 @@
+package de.borissov;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+/**
+ * @author Sergej Borissov
+ * @date: 23.08.2021
+ * @idee: Verbesserung der Page Counter Idee und bessere Aufteilung
+ *        in Module mit der Möglichkeit der Erweiterung
+ *
+ *        Improvement of the page counter idea and better division
+ *          into modules with the possibility of extension
+ */
+
+
+public class Main  extends Application {
+    
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+        primaryStage.setTitle("Page Counter Manager");
+
+        LineChartFactory lineChart = new LineChartFactory();
+        ButtonFactory button = new ButtonFactory();
+        TextFieldFactory textField = new TextFieldFactory();
+
+        VBox vBox = new VBox(lineChart.buildLineChart(),
+                button.buildButton(),
+                textField.buildTextField());
+        Slider slider = new Slider();
+        Zufallszahl zufallszahl = new Zufallszahl();
+
+        primaryStage.setScene(new Scene(vBox));
+        primaryStage.show();
+
+
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
