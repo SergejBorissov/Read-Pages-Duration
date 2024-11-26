@@ -1,0 +1,12 @@
+package de.borissov;
+
+import java.util.Random;
+
+public class Zufallszahl {
+
+    Random random = new Random();
+
+    public int numberPlay(){
+        return random.nextInt(60);
+    }
+}
